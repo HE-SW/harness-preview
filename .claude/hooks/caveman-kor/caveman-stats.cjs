@@ -2,7 +2,7 @@
 // caveman-stats — read the active Claude Code session log, print real token
 // usage plus an estimated savings figure from the benchmark in benchmarks/.
 //
-// Run directly:    node hooks/caveman-stats.js
+// Run directly:    node hooks/caveman-stats.cjs
 // Inside Claude:   /caveman-stats triggers this via the UserPromptSubmit hook.
 // Hook integration passes --session-file <transcript_path> so we always read
 // the active session, not whichever JSONL was modified most recently.
@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const { readFlag, appendFlag, readHistory, safeWriteFlag } = require('./caveman-config');
+const { readFlag, appendFlag, readHistory, safeWriteFlag } = require('./caveman-config.cjs');
 
 // Mean per-task savings from benchmarks/results/*.json (avg_savings: 65 across
 // 10 tasks, sonnet-4-20250514). Only 'full' has measured data; lite / ultra /

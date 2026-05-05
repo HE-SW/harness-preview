@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { execFileSync } = require('child_process');
-const { getDefaultMode, safeWriteFlag, readFlag, VALID_MODES } = require('./caveman-config');
+const { getDefaultMode, safeWriteFlag, readFlag, VALID_MODES } = require('./caveman-config.cjs');
 
 // Modes handled by their own slash commands (/caveman-commit, etc.) — not
 // selectable via /caveman <arg>.
@@ -42,7 +42,7 @@ process.stdin.on('end', () => {
     if (statsMatch) {
       const tailArgs = (statsMatch[1] || '').trim().split(/\s+/).filter(Boolean);
       try {
-        const statsPath = path.join(__dirname, 'caveman-stats.js');
+        const statsPath = path.join(__dirname, 'caveman-stats.cjs');
         const argv = [statsPath];
         if (data.transcript_path) argv.push('--session-file', data.transcript_path);
         if (tailArgs.includes('--share')) argv.push('--share');
@@ -56,7 +56,7 @@ process.stdin.on('end', () => {
       } catch (e) {
         process.stdout.write(JSON.stringify({
           decision: 'block',
-          reason: 'caveman-stats: could not run stats script.\nTry manually: node hooks/caveman-stats.js'
+          reason: 'caveman-stats: could not run stats script.\nTry manually: node hooks/caveman-stats.cjs'
         }));
       }
       return;

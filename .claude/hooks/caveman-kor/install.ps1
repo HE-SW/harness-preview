@@ -13,7 +13,7 @@ $ScriptDir = $PSScriptRoot
 $ClaudeDir = (Resolve-Path (Join-Path $ScriptDir "..\..")).Path
 $Settings  = Join-Path $ClaudeDir "settings.json"
 
-$Required = @("caveman-config.js", "caveman-activate.js", "caveman-mode-tracker.js", "caveman-stats.js", "caveman-statusline.ps1")
+$Required = @("caveman-config.cjs", "caveman-activate.cjs", "caveman-mode-tracker.cjs", "caveman-stats.cjs", "caveman-statusline.ps1")
 foreach ($f in $Required) {
     if (-not (Test-Path (Join-Path $ScriptDir $f))) {
         Write-Host "ERROR: $f missing in $ScriptDir" -ForegroundColor Red
@@ -55,8 +55,8 @@ const wire = (event, file, msg) => {
     console.log('  ' + event + ' already wired');
   }
 };
-wire('SessionStart', 'caveman-activate.js', 'Loading caveman mode...');
-wire('UserPromptSubmit', 'caveman-mode-tracker.js', 'Tracking caveman mode...');
+wire('SessionStart', 'caveman-activate.cjs', 'Loading caveman mode...');
+wire('UserPromptSubmit', 'caveman-mode-tracker.cjs', 'Tracking caveman mode...');
 
 fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
 '@

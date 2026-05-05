@@ -19,7 +19,7 @@ CLAUDE_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 SETTINGS="$CLAUDE_DIR/settings.json"
 
 # Verify hook files exist alongside this script
-for h in caveman-config.js caveman-activate.js caveman-mode-tracker.js caveman-stats.js caveman-statusline.sh; do
+for h in caveman-config.cjs caveman-activate.cjs caveman-mode-tracker.cjs caveman-stats.cjs caveman-statusline.sh; do
   [ -f "$SCRIPT_DIR/$h" ] || { echo "ERROR: $h missing in $SCRIPT_DIR" >&2; exit 1; }
 done
 
@@ -56,8 +56,8 @@ if ! CAVEMAN_SETTINGS="$SETTINGS" CAVEMAN_FORCE="$FORCE" node -e "
       console.log('  ' + event + ' already wired');
     }
   };
-  wire('SessionStart', 'caveman-activate.js', 'Loading caveman mode...');
-  wire('UserPromptSubmit', 'caveman-mode-tracker.js', 'Tracking caveman mode...');
+  wire('SessionStart', 'caveman-activate.cjs', 'Loading caveman mode...');
+  wire('UserPromptSubmit', 'caveman-mode-tracker.cjs', 'Tracking caveman mode...');
 
   fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
 "; then
