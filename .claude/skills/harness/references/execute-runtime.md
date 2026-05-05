@@ -5,9 +5,12 @@
 ## 명령
 
 ```bash
-python3 scripts/execute.py 0-mvp           # 순차 실행
-python3 scripts/execute.py 0-mvp --push    # 완료 후 origin에 push
+python3 scripts/execute.py 0-mvp                     # 순차 실행
+python3 scripts/execute.py 0-mvp --push              # 완료 후 origin에 push
+python3 scripts/execute.py 0-mvp --model opus        # 모델 오버라이드
 ```
+
+**모델 해석 우선순위**: `--model` CLI > `phases/<task>/index.json`의 `model` > 기본 `sonnet`. 선택 기준은 `references/model-selection.md`.
 
 ## 자동 처리 항목
 
