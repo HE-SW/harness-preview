@@ -127,3 +127,13 @@ phase/step 만든 뒤 user에게 보여줄 마지막 메시지:
 1. 만든 파일 경로 목록
 2. 다음 명령: `python3 scripts/execute.py <task-name>`
 3. error/blocked 발생 시 복구 방법 (references/execute-runtime.md 요약)
+
+## F. 자동 review 호출
+
+D 단계로 phases/* 파일 생성을 끝낸 직후, 같은 턴에 `review` skill을 호출하라. 방금 추가한 phases/* 파일 셋이 변경 대상이 된다.
+
+목적: 작성한 step 분해가 프로젝트의 ARCHITECTURE/ADR/CRITICAL 규칙과 충돌 없는지 마지막 sanity check. 위반 발견 시 user가 execute.py 돌리기 전에 step 파일을 고칠 수 있다.
+
+호출 방법: review skill의 SKILL.md 워크플로우대로 진행. 변경 범위 탐지 단계에서 "방금 만든 phases/<task>/* 파일들"을 명시적 범위로 넘겨라 — git status fallback에 의존하지 마라 (commit 안 했을 수 있음).
+
+Skip 조건: user가 명시적으로 "review 건너뛰어", "그냥 끝내" 같이 말한 경우만. 그 외엔 항상 실행.
