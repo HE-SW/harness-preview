@@ -79,9 +79,19 @@ $ctxPct = $null
 $ctxColor = $CtxSafe
 if ($sessionId) {
     $maxCtx = GetMaxContext $modelName
-    $projectKey = ($cwd -replace '~', $home) -replace '[\\/]', '-'
+    $projectsDir = Join-Path $home ".claude\projects"
+    # Primary: derive folder name from cwd. Claude Code encodes path separators
+    # AND the Windows drive colon as '-', each separator becoming one dash.
+    $absCwd = $cwd -replace '~', $home
+    $projectKey = $absCwd -replace '[\\/:]', '-'
     $projectKey = $projectKey -replace '^-', ''
-    $sessionFile = Join-Path $home ".claude\projects\-$projectKey\$sessionId.jsonl"
+    $sessionFile = Join-Path $projectsDir "-$projectKey\$sessionId.jsonl"
+    # Fallback: if exact path missed, scan for the session file by id.
+    if (-not (Test-Path $sessionFile)) {
+        $found = Get-ChildItem -Path $projectsDir -Filter "$sessionId.jsonl" -Recurse -ErrorAction SilentlyContinue |
+                 Select-Object -First 1
+        if ($found) { $sessionFile = $found.FullName }
+    }
     if (Test-Path $sessionFile) {
         try {
             $tail = Get-Content $sessionFile -Tail 20 -ErrorAction Stop
