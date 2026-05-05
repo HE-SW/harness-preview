@@ -47,4 +47,4 @@
   phase/step으로 분해한 뒤 `python3 scripts/execute.py <task>`로 실행한다.
 - CRITICAL: Plan Mode 종료 후에도 동일. 플랜이 승인됐다고 바로 코드를 작성하지 말고,
   먼저 `harness` skill을 호출해 `phases/<task>/` 파일을 만들고 사용자 승인을 받은 뒤 실행한다.
-- 예외: 단일 파일 typo 수정, 1-2줄 버그 핫픽스, 문서 수정처럼 phase가 과한 작업은 직접 수정 가능.
+- 예외: 최초 /docs 작업시, 단일 파일 typo 수정, 1-2줄 버그 핫픽스, 문서 수정처럼 phase가 과한 작업은 직접 수정 가능.
