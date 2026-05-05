@@ -61,8 +61,15 @@ wire('UserPromptSubmit', 'caveman-mode-tracker.js', 'Tracking caveman mode...');
 fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
 '@
 
-node -e $nodeScript
-if ($LASTEXITCODE -eq 0) {
+$tmpJs = Join-Path ([System.IO.Path]::GetTempPath()) ("caveman-merge-" + [Guid]::NewGuid().ToString() + ".js")
+Set-Content -Path $tmpJs -Value $nodeScript -Encoding UTF8
+try {
+    & node $tmpJs
+    $exit = $LASTEXITCODE
+} finally {
+    Remove-Item $tmpJs -Force -ErrorAction SilentlyContinue
+}
+if ($exit -eq 0) {
     Remove-Item "$Settings.bak" -Force
 } else {
     Write-Host "ERROR: merge failed; original preserved at $Settings.bak" -ForegroundColor Red
