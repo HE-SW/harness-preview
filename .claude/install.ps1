@@ -57,13 +57,21 @@ function Check-Python {
     } catch { return $false }
 }
 
+function Refresh-Path {
+    $machine = [Environment]::GetEnvironmentVariable("Path", "Machine")
+    $user    = [Environment]::GetEnvironmentVariable("Path", "User")
+    $env:Path = "$machine;$user"
+}
+
 function Install-WithWinget($id, $name) {
     if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
         Write-Host "  ERROR: winget not found. Install $name manually from the official site." -ForegroundColor Red
         return $false
     }
     & winget install --id $id --silent --accept-source-agreements --accept-package-agreements
-    return ($LASTEXITCODE -eq 0)
+    $ok = ($LASTEXITCODE -eq 0)
+    if ($ok) { Refresh-Path }
+    return $ok
 }
 
 if (Check-Node) {
