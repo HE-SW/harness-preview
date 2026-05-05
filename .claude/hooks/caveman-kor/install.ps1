@@ -62,5 +62,11 @@ fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
 '@
 
 node -e $nodeScript
+if ($LASTEXITCODE -eq 0) {
+    Remove-Item "$Settings.bak" -Force
+} else {
+    Write-Host "ERROR: merge failed; original preserved at $Settings.bak" -ForegroundColor Red
+    exit 1
+}
 
 Write-Host "Done. Restart Claude Code to activate." -ForegroundColor Green

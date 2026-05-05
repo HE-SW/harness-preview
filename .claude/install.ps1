@@ -1,7 +1,7 @@
-# template-harness — generates .claude/settings.json (statusLine only) for the cloned project (Windows)
-# Delegates hook wiring to hooks\caveman-kor\install.ps1.
+# template-harness — merges statusLine into .claude\settings.json (Windows)
+# Delegates hook wiring to hooks\caveman-kor\install.ps1. Existing hooks/keys are preserved.
 # Usage: powershell -ExecutionPolicy Bypass -File install.ps1 [-Force] [-Yes]
-#   -Force: overwrite existing settings.json
+#   -Force: overwrite existing statusLine entry (otherwise left untouched)
 #   -Yes  : auto-confirm runtime installs (skip Y/N prompts)
 #
 # Note: statusline.ps1 is a lean port of statusline.sh (cwd + git + model + context % + caveman badge).
@@ -99,26 +99,39 @@ if (Check-Python) {
     }
 }
 
-if (Test-Path $Settings) {
-    if (-not $Force) {
-        Write-Host "$Settings exists. Use -Force to overwrite (current file will be backed up to .bak)."
-        exit 0
-    }
-    Copy-Item $Settings "$Settings.bak" -Force
-    Write-Host "  backed up to $Settings.bak"
-}
+if (-not (Test-Path $Settings)) { Set-Content -Path $Settings -Value "{}" -Encoding UTF8 }
+Copy-Item $Settings "$Settings.bak" -Force
 
-$json = @'
-{
-  "statusLine": {
-    "type": "command",
-    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/.claude/statusline.ps1\""
-  }
+$env:HARNESS_SETTINGS = $Settings -replace '\\', '/'
+$env:HARNESS_FORCE    = if ($Force) { "1" } else { "0" }
+$env:HARNESS_CMD      = 'powershell -NoProfile -ExecutionPolicy Bypass -File "$CLAUDE_PROJECT_DIR/.claude/statusline.ps1"'
+
+$nodeScript = @'
+const fs = require('fs');
+const p = process.env.HARNESS_SETTINGS;
+const force = process.env.HARNESS_FORCE === '1';
+const cmd = process.env.HARNESS_CMD;
+const s = JSON.parse(fs.readFileSync(p, 'utf8'));
+if (!s.statusLine) {
+  s.statusLine = { type: 'command', command: cmd };
+  console.log('  wired statusLine');
+} else if (force) {
+  s.statusLine = { type: 'command', command: cmd };
+  console.log('  rewrote statusLine');
+} else {
+  console.log('  statusLine already set (use -Force to overwrite)');
 }
+fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
 '@
 
-Set-Content -Path $Settings -Value $json -Encoding UTF8
-Write-Host "Wrote $Settings (statusLine only)" -ForegroundColor Green
+node -e $nodeScript
+if ($LASTEXITCODE -eq 0) {
+    Remove-Item "$Settings.bak" -Force
+} else {
+    Write-Host "ERROR: merge failed; original preserved at $Settings.bak" -ForegroundColor Red
+    exit 1
+}
+Write-Host "Merged statusLine into $Settings" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "Delegating hook setup to hooks\caveman-kor\install.ps1..."

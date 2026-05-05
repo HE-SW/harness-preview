@@ -1,8 +1,8 @@
 #!/bin/bash
-# template-harness — generates .claude/settings.json (statusLine only) for the cloned project (Mac/Linux)
-# Delegates hook wiring to hooks/caveman-kor/install.sh.
+# template-harness — merges statusLine into .claude/settings.json (Mac/Linux)
+# Delegates hook wiring to hooks/caveman-kor/install.sh. Existing hooks/keys are preserved.
 # Usage: bash install.sh [--force] [--yes]
-#   --force: overwrite existing settings.json
+#   --force: overwrite existing statusLine entry (otherwise left untouched)
 #   --yes  : auto-confirm runtime installs (skip Y/N prompts)
 set -e
 
@@ -114,26 +114,35 @@ else
   fi
 fi
 
-if [ -f "$SETTINGS" ]; then
-  if [ "$FORCE" -eq 0 ]; then
-    echo "$SETTINGS exists. Use --force to overwrite (current file will be backed up to .bak)."
-    exit 0
-  fi
-  cp "$SETTINGS" "$SETTINGS.bak"
-  echo "  backed up to $SETTINGS.bak"
+[ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
+cp "$SETTINGS" "$SETTINGS.bak"
+
+STATUSLINE_CMD='/bin/bash "$CLAUDE_PROJECT_DIR/.claude/statusline.sh"'
+if HARNESS_SETTINGS="$SETTINGS" HARNESS_FORCE="$FORCE" HARNESS_CMD="$STATUSLINE_CMD" node -e "
+  const fs = require('fs');
+  const p = process.env.HARNESS_SETTINGS;
+  const force = process.env.HARNESS_FORCE === '1';
+  const cmd = process.env.HARNESS_CMD;
+  const s = JSON.parse(fs.readFileSync(p, 'utf8'));
+  if (!s.statusLine) {
+    s.statusLine = { type: 'command', command: cmd };
+    console.log('  wired statusLine');
+  } else if (force) {
+    s.statusLine = { type: 'command', command: cmd };
+    console.log('  rewrote statusLine');
+  } else {
+    console.log('  statusLine already set (use --force to overwrite)');
+  }
+  fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
+"; then
+  rm -f "$SETTINGS.bak"
+else
+  echo "ERROR: merge failed; original preserved at $SETTINGS.bak" >&2
+  exit 1
 fi
 
-cat > "$SETTINGS" <<'EOF'
-{
-  "statusLine": {
-    "type": "command",
-    "command": "/bin/bash \"$CLAUDE_PROJECT_DIR/.claude/statusline.sh\""
-  }
-}
-EOF
-
 chmod +x "$SCRIPT_DIR/statusline.sh"
-echo "Wrote $SETTINGS (statusLine only)"
+echo "Merged statusLine into $SETTINGS"
 
 echo ""
 echo "Delegating hook setup to hooks/caveman-kor/install.sh..."

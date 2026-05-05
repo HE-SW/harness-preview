@@ -28,7 +28,7 @@ chmod +x "$SCRIPT_DIR/caveman-statusline.sh"
 [ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
 cp "$SETTINGS" "$SETTINGS.bak"
 
-CAVEMAN_SETTINGS="$SETTINGS" CAVEMAN_FORCE="$FORCE" node -e "
+if ! CAVEMAN_SETTINGS="$SETTINGS" CAVEMAN_FORCE="$FORCE" node -e "
   const fs = require('fs');
   const p = process.env.CAVEMAN_SETTINGS;
   const force = process.env.CAVEMAN_FORCE === '1';
@@ -60,6 +60,10 @@ CAVEMAN_SETTINGS="$SETTINGS" CAVEMAN_FORCE="$FORCE" node -e "
   wire('UserPromptSubmit', 'caveman-mode-tracker.js', 'Tracking caveman mode...');
 
   fs.writeFileSync(p, JSON.stringify(s, null, 2) + '\n');
-"
+"; then
+  echo "ERROR: merge failed; original preserved at $SETTINGS.bak" >&2
+  exit 1
+fi
+rm -f "$SETTINGS.bak"
 
 echo "Done. Restart Claude Code to activate."
