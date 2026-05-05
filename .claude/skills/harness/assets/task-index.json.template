@@ -1,0 +1,8 @@
+{
+  "project": "<PROJECT_NAME>",
+  "phase": "<TASK_NAME>",
+  "steps": [
+    { "step": 0, "name": "<step-0-slug>", "status": "pending" },
+    { "step": 1, "name": "<step-1-slug>", "status": "pending" }
+  ]
+}
