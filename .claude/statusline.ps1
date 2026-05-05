@@ -4,6 +4,13 @@
 # Skipped vs statusline.sh: ccusage, session reset time, cost/burn rate.
 
 $ErrorActionPreference = "SilentlyContinue"
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+# ---- unicode glyphs (ASCII-safe source so PS 5.1 on cp949 doesn't mangle) ----
+$GlyphBlock = [char]0x2588          # full block
+$GlyphLight = [char]0x2591          # light shade
+$GlyphRobot = [char]::ConvertFromUtf32(0x1F916)  # robot face
+$GlyphBrain = [char]::ConvertFromUtf32(0x1F9E0)  # brain
 
 # ---- read stdin ----
 $raw = [Console]::In.ReadToEnd()
@@ -28,7 +35,7 @@ function ProgressBar([int]$pct, [int]$width = 5) {
     if ($pct -gt 100) { $pct = 100 }
     $filled = [math]::Floor($pct * $width / 100)
     $empty  = $width - $filled
-    return ('█' * $filled) + ('░' * $empty)
+    return ($GlyphBlock.ToString() * $filled) + ($GlyphLight.ToString() * $empty)
 }
 
 # ---- extract fields ----
@@ -108,12 +115,12 @@ $out += "$DirColor$cwd$(Reset)"
 if ($gitBranch) {
     $out += " $GitColor($gitBranch)$(Reset)"
 }
-$out += "  🤖 $ModelColor$modelShort$(Reset)"
+$out += "  $GlyphRobot $ModelColor$modelShort$(Reset)"
 if ($null -ne $ctxPct) {
     $bar = ProgressBar $ctxPct 5
-    $out += "  🧠 $ctxColor$ctxPct% $bar$(Reset)"
+    $out += "  $GlyphBrain $ctxColor$ctxPct% $bar$(Reset)"
 } else {
-    $out += "  🧠 --"
+    $out += "  $GlyphBrain --"
 }
 
 # ---- caveman badge ----
