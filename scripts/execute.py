@@ -428,6 +428,13 @@ def main():
 
     StepExecutor(args.phase_dir, auto_push=args.push, model=args.model).run()
 
+    # Windows에서 claude 손자 프로세스가 stdio/console 핸들을 들고 있으면
+    # 인터프리터 종료가 지연되므로 명시적으로 빠져나간다. 이 시점엔 이미
+    # 모든 git 커밋과 JSON 갱신이 끝나 잃을 상태가 없다.
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os._exit(0)
+
 
 if __name__ == "__main__":
     main()
