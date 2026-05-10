@@ -1,16 +1,53 @@
 {
   "phases": [
-    { "dir": "0-scaffold", "status": "pending" },
-    { "dir": "1-types-store-pure", "status": "pending" },
-    { "dir": "2-shell-layout", "status": "pending" },
-    { "dir": "3-palette-fixed", "status": "pending" },
-    { "dir": "4-canvas-nodes", "status": "pending" },
-    { "dir": "5-containers", "status": "pending" },
-    { "dir": "6-edges", "status": "pending" },
-    { "dir": "7-presets", "status": "pending" },
-    { "dir": "8-import-export", "status": "pending" },
-    { "dir": "9-user-palette", "status": "pending" },
-    { "dir": "10-shortcuts-clipboard", "status": "pending" },
-    { "dir": "11-onboarding-empty", "status": "pending" }
+    {
+      "dir": "0-scaffold",
+      "status": "completed",
+      "completed_at": "2026-05-10T17:58:27+0900"
+    },
+    {
+      "dir": "1-types-store-pure",
+      "status": "pending"
+    },
+    {
+      "dir": "2-shell-layout",
+      "status": "pending"
+    },
+    {
+      "dir": "3-palette-fixed",
+      "status": "pending"
+    },
+    {
+      "dir": "4-canvas-nodes",
+      "status": "pending"
+    },
+    {
+      "dir": "5-containers",
+      "status": "pending"
+    },
+    {
+      "dir": "6-edges",
+      "status": "pending"
+    },
+    {
+      "dir": "7-presets",
+      "status": "pending"
+    },
+    {
+      "dir": "8-import-export",
+      "status": "pending"
+    },
+    {
+      "dir": "9-user-palette",
+      "status": "pending"
+    },
+    {
+      "dir": "10-shortcuts-clipboard",
+      "status": "pending"
+    },
+    {
+      "dir": "11-onboarding-empty",
+      "status": "pending"
+    }
   ]
 }
