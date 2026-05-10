@@ -17,7 +17,7 @@
       "status": "completed",
       "started_at": "2026-05-10T17:51:25+0900",
       "summary": "deps installed, src/app shell + 빈 디렉토리 트리 + ESLint overrides 완료",
-      "completed_at": "2026-05-10T18:30:00+0900"
+      "completed_at": "2026-05-10T17:54:39+0900"
     },
     {
       "step": 2,
