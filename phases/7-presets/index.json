@@ -1,0 +1,10 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "7-presets",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "preset-panel", "status": "pending" },
+    { "step": 1, "name": "save-new-flow", "status": "pending" },
+    { "step": 2, "name": "panel-toggle", "status": "pending" }
+  ]
+}

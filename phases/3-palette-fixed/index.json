@@ -1,0 +1,9 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "3-palette-fixed",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "catalog-data", "status": "pending" },
+    { "step": 1, "name": "palette-panel", "status": "pending" }
+  ]
+}

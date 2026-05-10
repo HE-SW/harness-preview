@@ -1,0 +1,10 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "10-shortcuts-clipboard",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "shortcuts-bind", "status": "pending" },
+    { "step": 1, "name": "clipboard", "status": "pending" },
+    { "step": 2, "name": "cheatsheet", "status": "pending" }
+  ]
+}

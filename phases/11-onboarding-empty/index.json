@@ -1,0 +1,10 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "11-onboarding-empty",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "empty-states", "status": "pending" },
+    { "step": 1, "name": "coachmarks", "status": "pending" },
+    { "step": 2, "name": "seed-board", "status": "pending" }
+  ]
+}

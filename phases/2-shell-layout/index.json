@@ -1,0 +1,10 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "2-shell-layout",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "shell", "status": "pending" },
+    { "step": 1, "name": "header", "status": "pending" },
+    { "step": 2, "name": "primitives", "status": "pending" }
+  ]
+}

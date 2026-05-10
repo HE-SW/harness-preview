@@ -1,0 +1,9 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "8-import-export",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "export", "status": "pending" },
+    { "step": 1, "name": "import", "status": "pending" }
+  ]
+}

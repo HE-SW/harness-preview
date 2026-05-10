@@ -1,0 +1,12 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "1-types-store-pure",
+  "model": "opus",
+  "steps": [
+    { "step": 0, "name": "domain-types", "status": "pending" },
+    { "step": 1, "name": "pure-helpers", "status": "pending" },
+    { "step": 2, "name": "persistence", "status": "pending" },
+    { "step": 3, "name": "store", "status": "pending" },
+    { "step": 4, "name": "io-and-statics", "status": "pending" }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "9-user-palette",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "add-dialog", "status": "pending" },
+    { "step": 1, "name": "catalog-merge", "status": "pending" }
+  ]
+}

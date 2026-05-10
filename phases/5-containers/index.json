@@ -1,0 +1,10 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "5-containers",
+  "model": "opus",
+  "steps": [
+    { "step": 0, "name": "container-node", "status": "pending" },
+    { "step": 1, "name": "reparent", "status": "pending" },
+    { "step": 2, "name": "delete-cascade", "status": "pending" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "6-edges",
+  "model": "sonnet",
+  "steps": [
+    { "step": 0, "name": "edge-components", "status": "pending" },
+    { "step": 1, "name": "connect-hook", "status": "pending" },
+    { "step": 2, "name": "edge-popover", "status": "pending" }
+  ]
+}

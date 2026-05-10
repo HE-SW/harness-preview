@@ -1,0 +1,11 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "4-canvas-nodes",
+  "model": "opus",
+  "steps": [
+    { "step": 0, "name": "canvas-shell", "status": "pending" },
+    { "step": 1, "name": "item-node", "status": "pending" },
+    { "step": 2, "name": "dnd-hook", "status": "pending" },
+    { "step": 3, "name": "multi-select", "status": "pending" }
+  ]
+}
