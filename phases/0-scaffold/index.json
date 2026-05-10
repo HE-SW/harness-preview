@@ -8,7 +8,8 @@
       "name": "project-init",
       "status": "completed",
       "started_at": "2026-05-10T17:50:36+0900",
-      "summary": "build configs (Next.js + TS strict + Tailwind + Vitest + ESLint) 생성, 의존성 설치 전"
+      "summary": "build configs (Next.js + TS strict + Tailwind + Vitest + ESLint) 생성, 의존성 설치 전",
+      "completed_at": "2026-05-10T17:51:25+0900"
     },
     {
       "step": 1,

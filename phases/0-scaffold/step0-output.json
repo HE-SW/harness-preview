@@ -1,0 +1,7 @@
+{
+  "step": 0,
+  "name": "project-init",
+  "exitCode": 0,
+  "stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"api_error_status\":null,\"duration_ms\":44235,\"duration_api_ms\":40744,\"num_turns\":14,\"result\":\"AC 8개 전부 통과. 설정 파일 생성 완료, step 0 `completed`.\",\"stop_reason\":\"end_turn\",\"session_id\":\"454efd14-a3e6-4e46-ba29-d0383b43b4b6\",\"total_cost_usd\":0.18646815,\"usage\":{\"input_tokens\":10,\"cache_creation_input_tokens\":18775,\"cache_read_input_tokens\":252823,\"output_tokens\":2679,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":18775,\"ephemeral_5m_input_tokens\":0},\"inference_geo\":\"\",\"iterations\":[{\"input_tokens\":1,\"output_tokens\":34,\"cache_read_input_tokens\":31644,\"cache_creation_input_tokens\":356,\"cache_creation\":{\"ephemeral_5m_input_tokens\":0,\"ephemeral_1h_input_tokens\":356},\"type\":\"message\"}],\"speed\":\"standard\"},\"modelUsage\":{\"claude-sonnet-4-6\":{\"inputTokens\":10,\"outputTokens\":2679,\"cacheReadInputTokens\":252823,\"cacheCreationInputTokens\":18775,\"webSearchRequests\":0,\"costUSD\":0.18646815,\"contextWindow\":200000,\"maxOutputTokens\":32000}},\"permission_denials\":[],\"terminal_reason\":\"completed\",\"fast_mode_state\":\"off\",\"uuid\":\"9b456be2-f7c4-499f-ae21-09c141a04c50\"}\n",
+  "stderr": ""
+}
