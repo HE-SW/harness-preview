@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {},
+  "overrides": [
+    {
+      "files": [
+        "src/lib/io.ts",
+        "src/lib/persistence.ts",
+        "src/lib/migrations.ts"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["**/store"],
+                "importNames": ["*"],
+                "message": "io.ts/persistence.ts/migrations.ts는 store를 직접 import 하지 마라. 의존 방향: ui → store → {persistence, io, migrations} → types"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

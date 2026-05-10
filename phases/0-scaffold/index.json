@@ -1,0 +1,25 @@
+{
+  "project": "lukis-drawing-board",
+  "phase": "0-scaffold",
+  "model": "sonnet",
+  "steps": [
+    {
+      "step": 0,
+      "name": "project-init",
+      "status": "completed",
+      "started_at": "2026-05-10T17:50:36+0900",
+      "summary": "build configs (Next.js + TS strict + Tailwind + Vitest + ESLint) 생성, 의존성 설치 전"
+    },
+    {
+      "step": 1,
+      "name": "app-shell",
+      "status": "pending"
+    },
+    {
+      "step": 2,
+      "name": "fill-docs",
+      "status": "pending"
+    }
+  ],
+  "created_at": "2026-05-10T17:50:36+0900"
+}
