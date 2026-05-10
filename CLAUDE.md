@@ -1,32 +1,37 @@
 # CLAUDE.md
 
-## 프로젝트: {프로젝트명}
+## 프로젝트: 루키스의 그림판 (lukis-drawing-board)
 
-목표 : {목표작성}
+목표 : 강의용 드래그 앤 드롭 다이어그램 도구. 좌측 팔레트 → 가운데 React Flow 칠판 → 우측 프리셋. 컨테이너 중첩, 4종 연결선, JSON import/export, localStorage 영속.
 
 ## 기술 스택
 
-- {프레임워크 (예: Next.js 15)}
-- {언어 (예: TypeScript strict mode)}
-- {스타일링 (예: Tailwind CSS)}
+- Next.js 15 (App Router)
+- TypeScript strict
+- Tailwind CSS
+- `@xyflow/react` (React Flow)
+- `zustand` + `zundo` (state + history)
+- `zod` (import 검증)
+- `vitest` (단위 테스트)
 
 ## 아키텍처 규칙
 
-- CRITICAL: {절대 지켜야 할 규칙 1 (예: 모든 API 로직은 app/api/ 라우트 핸들러에서만 처리)}
-- CRITICAL: {절대 지켜야 할 규칙 2 (예: 클라이언트 컴포넌트에서 직접 외부 API를 호출하지 말 것)}
-- {일반 규칙 (예: 컴포넌트는 components/ 폴더에, 타입은 types/ 폴더에 분리)}
+- CRITICAL: `src/{app,components,types,lib,hooks}` 구조 유지. 의존 방향 `ui → store → {persistence, io, migrations} → types`. ESLint `no-restricted-imports`로 강제.
+- CRITICAL: `io.ts`는 store 미참조(pure). localStorage 접근은 `useEffect` 내부만. SSR boundary 명시.
+- 컴포넌트는 `components/` 폴더에, 타입은 `types/` 폴더에 분리. React Flow는 controlled (`nodes={fromStore}`). 내부 `useNodesState` 금지.
 
 ## 개발 프로세스
 
-- CRITICAL: 새 기능 구현 시 반드시 테스트를 먼저 작성하고, 테스트가 통과하는 구현을 작성할 것 (TDD)
+- CRITICAL TDD 부분 waiver: 핵심 로직 한정 적용. 적용 대상: `src/lib/{reparent,cascadeDelete,reIdSubgraph,validateImport,persistence,migrations}.ts`. UI / React Flow 통합 / hook은 수동 시나리오 검증.
 - 커밋 메시지는 conventional commits 형식을 따를 것 (feat:, fix:, docs:, refactor:)
 
-## 명령어 {프로젝트에 맞게 작성할 것}
+## 명령어
 
-    npm run dev # 개발 서버
-    npm run build # 프로덕션 빌드
-    npm run lint # ESLint
-    npm run test # 테스트
+    npm run dev        # 개발 서버
+    npm run build      # 프로덕션 빌드
+    npm run lint       # ESLint
+    npm run typecheck  # TypeScript 검사
+    npm run test       # 테스트
 
 ## 클로드 코드 사용시 주의사항
 

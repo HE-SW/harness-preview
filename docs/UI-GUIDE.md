@@ -2,9 +2,9 @@
 
 ## 디자인 원칙
 
-1. {원칙 1 — 예: "도구처럼 보여야 한다. 마케팅 페이지가 아니라 매일 쓰는 대시보드."}
-2. {원칙 2}
-3. {원칙 3}
+1. 라이브 강의 도구 — perceived load 1초 미만. 칠판이 즉시 반응해야 한다.
+2. 강사 손 닿는 곳에 모든 컨트롤 — 팔레트·칠판·프리셋이 한 화면 안에 상주.
+3. 학생이 따라 그릴 수 있을 만큼 단순한 시각 — 색·그림자·애니메이션 최소화.
 
 ## AI 슬롭 안티패턴 — 하지 마라
 
@@ -22,69 +22,72 @@
 
 ### 배경
 
-| 용도   | 값            |
-| ------ | ------------- |
-| 페이지 | {예: #0a0a0a} |
-| 카드   | {예: #141414} |
+| 용도   | 값      |
+| ------ | ------- |
+| 페이지 | #0a0a0a |
+| 카드   | #141414 |
 
 ### 텍스트
 
-| 용도      | 값                     |
-| --------- | ---------------------- |
-| 주 텍스트 | {예: text-white}       |
-| 본문      | {예: text-neutral-300} |
-| 보조      | {예: text-neutral-400} |
-| 비활성    | {예: text-neutral-500} |
+| 용도      | 값               |
+| --------- | ---------------- |
+| 주 텍스트 | text-white       |
+| 본문      | text-neutral-300 |
+| 보조      | text-neutral-400 |
+| 비활성    | text-neutral-500 |
 
 ### 데이터/시맨틱 색상
 
-| 용도        | 값            |
-| ----------- | ------------- |
-| {긍정/성공} | {예: #22c55e} |
-| {부정/에러} | {예: #ef4444} |
-| {중립/기본} | {예: #525252} |
+| 용도             | 값                                     |
+| ---------------- | -------------------------------------- |
+| 긍정/성공        | #22c55e                                |
+| 부정/에러        | #ef4444                                |
+| 중립/기본        | #525252 (neutral-600)                  |
+| 셀렉션 ring      | ring-violet-400/60 (셀렉션·강조 한정) |
+| Drop target ring | ring-emerald-400/40                    |
+| Reject ring      | ring-red-400/60                        |
 
 ## 컴포넌트
 
 ### 카드
 
 ```
-{예: rounded-lg bg-[#141414] border border-neutral-800 p-6}
+rounded-lg bg-[#141414] border border-neutral-800 p-4
 ```
 
 ### 버튼
 
 ```
-Primary: {예: rounded-lg bg-white text-black hover:bg-neutral-200}
-Text:    {예: text-neutral-500 hover:text-neutral-300}
+Primary: rounded-lg bg-white text-black hover:bg-neutral-200 text-sm font-medium px-3 py-1.5
+Text:    text-neutral-500 hover:text-neutral-300 text-sm
 ```
 
 ### 입력 필드
 
 ```
-{예: rounded-lg bg-neutral-900 border border-neutral-800 px-4 py-3}
+rounded-lg bg-neutral-900 border border-neutral-800 px-3 py-2 text-sm text-white placeholder:text-neutral-600
 ```
 
 ## 레이아웃
 
-- 전체 너비: {예: max-w-5xl}
-- 정렬: {예: 좌측 정렬 기본. 중앙 정렬 금지}
-- 간격: {예: gap-3~4, 섹션 간 space-y-8}
+- 3-panel fixed: 좌측 팔레트(w-48) · 가운데 칠판(flex-1) · 우측 프리셋(w-56)
+- 정렬: 좌측 정렬 기본.
+- 간격: gap-3~4, 패널 내부 space-y-2~3
 
 ## 타이포그래피
 
-| 용도        | 스타일                                         |
-| ----------- | ---------------------------------------------- |
-| 페이지 제목 | {예: text-4xl font-semibold text-white}        |
-| 카드 제목   | {예: text-sm font-medium text-neutral-400}     |
-| 본문        | {예: text-sm text-neutral-300 leading-relaxed} |
+| 용도      | 스타일                                                           |
+| --------- | ---------------------------------------------------------------- |
+| 패널 제목 | text-xs font-semibold text-neutral-400 uppercase tracking-wider  |
+| 노드 라벨 | text-sm font-medium text-white                                   |
+| 본문/설명 | text-xs text-neutral-400 leading-relaxed                         |
 
 ## 애니메이션
 
-- {허용할 애니메이션만 나열. 예: fade-in (0.4s), slide-up (0.5s)}
-- {그 외 모든 애니메이션 금지}
+- transition-colors (200ms): 버튼/ring 상태 전환
+- 그 외 모든 애니메이션 금지
 
 ## 아이콘
 
-- {예: SVG 인라인, strokeWidth 1.5}
-- {예: 아이콘 컨테이너(둥근 배경 박스)로 감싸지 않는다}
+- SVG 인라인, strokeWidth 1.5
+- 아이콘 컨테이너(둥근 배경 박스)로 감싸지 않는다
